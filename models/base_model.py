@@ -107,6 +107,12 @@ class BaseModel(torch.nn.Module):
                     network.load_state_dict(model_dict)                  
 
     def concat(self, tensors, dim=0):
+        try:
+            n_tensors = len(tensors)
+        except TypeError:
+            raise ValueError('concat expects a sequence of exactly two tensors')
+        if n_tensors != 2:
+            raise ValueError('concat expects a sequence of exactly two tensors, got %d' % n_tensors)
         if tensors[0] is not None and tensors[1] is not None:
             if isinstance(tensors[0], list):                
                 tensors_cat = []
