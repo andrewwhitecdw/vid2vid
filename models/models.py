@@ -4,8 +4,8 @@ import os
 import torch
 import torch.nn as nn
 import numpy as np
-import fractions
-def lcm(a,b): return abs(a * b)/fractions.gcd(a,b) if a and b else 0
+import math
+def lcm(a,b): return abs(a * b) // math.gcd(a,b) if a and b else 0
 
 def wrap_model(opt, modelG, modelD, flowNet):
     if opt.n_gpus_gen == len(opt.gpu_ids):
